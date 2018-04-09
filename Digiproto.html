@@ -1,0 +1,48 @@
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
+<form method="post" action="//submit.form" onSubmit="return validateForm();">
+<div style="width: 400px;">
+</div>
+<div style="padding-bottom: 18px;">Mikä kampus<span style="color: red;"> *</span><br/>
+<span><input type="radio" id="data_11_0" name="data_11" value="Malmi"/> Malmi</span><br/>
+<span><input type="radio" id="data_11_1" name="data_11" value="Pasila"/> Pasila</span><br/>
+<span><input type="radio" id="data_11_2" name="data_11" value="Haaga"/> Haaga</span><br/>
+<span><input type="radio" id="data_11_3" name="data_11" value="Vierumäki"/> Vierumäki</span><br/>
+<span><input type="radio" id="data_11_4" name="data_11" value="Porvoo"/> Porvoo</span><br/>
+</div>
+<div style="padding-bottom: 18px;">Menetkö portailla vai hissi<span style="color: red;"> *</span><br/>
+<span><input type="checkbox" id="data_14_0" name="data_14" value="Portaat"/> Portaat</span><br/>
+<span><input type="checkbox" id="data_14_1" name="data_14" value="Hissi"/> Hissi</span><br/>
+</div>
+<div style="padding-bottom: 18px;">Kuinka paljon kuntoilet viikossa<br/>
+<select id="data_15" name="data_15" style="width : 450px;" class="form-control">
+    <option>0h</option>
+    <option>0.5h</option>
+<option>1h</option>
+<option>3h</option>
+<option>4h+</option>
+</select>
+</div>
+<div style="padding-bottom: 18px;">Kuljetko julkisella vai yksityisellä<br/>
+<span><input type="checkbox" id="data_16_0" name="data_16" value="Julkisella"/> Julkisella</span><br/>
+<span><input type="checkbox" id="data_16_1" name="data_16" value="Yksityisellä"/> Yksityisellä</span><br/>
+</div>
+<div style="padding-bottom: 18px;"><input name="skip_Submit" value="Lähetä" type="submit"/></div>
+<div>
+</div>
+</form>
+</body>
+<script type="text/javascript">
+function validateForm() {
+if (!document.getElementById('data_11_0').checked && !document.getElementById('data_11_1').checked && !document.getElementById('data_11_2').checked && !document.getElementById('data_11_3').checked && !document.getElementById('data_11_4').checked ) {
+alert('Mikä kampus is required!');
+return false;}
+if (!document.getElementById('data_14_0').checked && !document.getElementById('data_14_1').checked ) {
+alert('Menetkö portailla vai hissi is required!');
+return false;}
+return true;
+}
+
+</script>
