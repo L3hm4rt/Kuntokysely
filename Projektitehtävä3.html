@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Playfair+Display" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.css">
+    <link rel="stylesheet" href="css/lightbox.css">
+    <style>
+        body {font-family: 'Open Sans', sans-serif;}
+        .navbar-brand {background-color:darkblue;}
+        .navbar-inverse .navbar-brand {font-family: 'Playfair Display', serif; color:darkgoldenrod;}
+        .navbar-inverse .navbar-nav li a{color: cornflowerblue; font-family: 'Inconsolata', monospace;}
+        .carousel-inner img {margin: auto; width:75%; max-width:600px; height:75%; max-height:800px;}
+        .pallo img{max-width:400px; width:100%; border-radius:50%;}
+    </style>
+</head>
+    <body>
+        <form>
+            <div id="lomake">
+            </div>
+            <button>Lähetä</button>
+        </form>    
+<script>
+    var lomakekentta = [];
+    $.getJSON("http://www.mocky.io/v2/5acf2f4d2e00004800c2c565", function(data){ 
+        
+        var items = [];
+        // tähän sijoitetaan lomakkeen muodostus
+        var otsikko = data.kysely;
+        items.push("<h2>"+otsikko + "</h2>");
+        
+        var kysymykset = data.kysymykset;
+
+        $.each( kysymykset, function( key, d ) {
+    
+            if (d.tyyppi == "radio"||d.tyyppi == "checkbox"){
+                items.push(d.kysymysteksti + "<br>");
+            //tehdään lomake-elementti
+            for (i = 0; i < d.value.lenght; i++) {
+            items.push("input type=" + d.tyyppi + " id=" + d.id +" name="+d.id+" value="+d.value[i] + ">"+d.value[i] +"<br>");
+            }
+        });
+    $( "<div/>", {
+    html: items.join( "" )
+    }).appendTo( "#lomake" );
+    });
+    </script>    
+    
+    
+</body>
+</html>
