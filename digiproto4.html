@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118047796-1"></script>
+
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="Digiprotocss.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="../assets/inputex-jsonschema/base-schema.js"></script>
+</head>
+
+<body>
+    <h1>Kuntokysely</h1>
+    <div style="width: 400px;">
+    </div>
+    <div id="lomake1">
+    </div>
+    <br>
+    <button onclick="laheta()">Lähetä</button>
+    <div>
+    </div>
+</body>
+<script type="text/javascript">
+    var lomakekentta = [];
+    $.getJSON("http://www.mocky.io/v2/5ae19f162d000055009d7d10", function (data) {
+
+
+
+
+
+        var items = [];
+
+
+
+        $.each(data, function (key, d) {
+            lomakekentta.push(d.id);
+            if (d.tyyppi == "radio") {
+                items.push(d.kysymys + "<br><br>");
+
+            }
+            if (d.tyyppi == "checkbox") {
+                items.push(d.kysymys + "<br><br>");
+
+            }
+            if (d.tyyppi == "text") {
+                items.push(d.kysymys + "<br><br>");
+                items.push("<textarea id=" + d.id + "></textarea><br><br>");
+            }
+            for (i = 0; i < d.value.length; i++) {
+                items.push("<input type=" + d.tyyppi + " id= " + d.id + " name=" + d.id + " value=" + d.value[i] + ">" + d.value[i] + "<br><br>");
+            }
+
+
+
+        });
+        $("<div/>", {
+            html: items.join("")
+        }).appendTo("#lomake1");
+    });
+
+    function laheta() {
+        var lahetys = "";
+        for (i = 0; i < lomakekentta.length; i++) {
+            var tyyppi = document.getElementById(lomakekentta[i]).type;
+            lahetys = tyyppi;
+
+        }
+        jsonData = lahetys;
+
+
+
+        var myJSON = JSON.stringify(jsonData);
+
+
+        $("button").click(function () {
+
+
+            $.ajax({
+                url: 'http://www.mocky.io/v2/5ae19f162d000055009d7d10',
+                type: 'POST',
+                dataType: 'json',
+                data: jsonData,
+                success: function () {
+                    alert('POST completed. Data:' + myJSON)
+                }
+            });
+        });
+    };
+</script>
+
+</html>
